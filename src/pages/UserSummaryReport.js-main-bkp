@@ -1,0 +1,172 @@
+import React, {useState, useEffect, useCallback} from 'react'
+import './UserSummaryReport.css';
+import Endpoints from '../endpoints';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+
+function UserSummaryReport() { 
+
+const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [summaryReportData, setSummaryReportData] = useState([]);
+
+
+const MySummaryReportData = [
+  { userName: 'arnavrout', summaryDate: '2023-12-07', totalRequest: 300, totalRejected: 100, totalSubmit: 230, totalDelivered: 120, totalFailed: 60, totalAwaited: 240, },
+  { userName: 'sunilkumar',summaryDate: '2024-1-11', totalRequest: 230, totalRejected: 90, totalSubmit: 111, totalDelivered: 122, totalFailed: 93, totalAwaited: 160, },
+  { userName: 'mohitkumar',summaryDate: '2023-12-21', totalRequest: 330, totalRejected: 80, totalSubmit: 211, totalDelivered: 162, totalFailed: 23, totalAwaited: 210, },
+  { userName: 'kumarsharma',summaryDate: '2024-1-04', totalRequest: 190, totalRejected: 40, totalSubmit: 99, totalDelivered: 133, totalFailed: 43, totalAwaited: 60, },
+];
+
+const handleDownload = () => {
+  // Generate CSV content from table headers and data
+  const csvContent =
+    "data:text/csv;charset=utf-8," +
+    "USER NAME,SUMMARY DATE,TOTAL REQUEST,TOTAL REJECTED,TOTAL SUBMIT,TOTAL DELIVERED,TOTAL FAILED,TOTAL AWAITED\n" +
+    summaryReportData.map(data => Object.values(data).join(',')).join('\n');
+
+  // Create a data URI
+  const encodedUri = encodeURI(csvContent);
+
+  // Create a link element and trigger a click event
+  const link = document.createElement('a');
+  link.href = encodedUri;
+  link.download = 'user_summary_report.csv';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+const fetchUserSummaryData = useCallback(async () => {
+  try {
+    const authToken = localStorage.getItem('authToken');
+    const authJwtToken = localStorage.getItem('authJwtToken');
+
+    const response = await fetch(Endpoints.get('userSummaryReport'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        loggedInUser: localStorage.getItem('loggedInUser'),
+        fromDate,
+        toDate,
+      }),
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+
+    if (Endpoints.validateResponse(data)) {
+      setSummaryReportData(data);
+    } else {
+      console.log("User Summary Report Fetch Failed");
+    }
+  } catch (error) {
+    console.error('Error fetching user summary data:', error);
+  }
+}, [fromDate, toDate]);
+
+
+useEffect(() => {
+  fetchUserSummaryData();
+}, [fromDate, toDate, fetchUserSummaryData]);
+
+
+const filterData = () => {
+  // Ensure that summaryReportData is an array
+  const dataArray = Array.isArray(summaryReportData) ? summaryReportData : [];
+
+  // Filter data based on the search term
+  const filteredData = dataArray.filter(data =>
+    Object.values(data).some(value =>
+      String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  return filteredData;
+};
+
+  return (
+    <div className='user-summary-container'>
+        <h2>User Summary Report</h2>
+        <hr/>
+        <div className="user-summary-card">
+        <div className="summary-card-content">
+        <label htmlFor="fromDate">From Date:</label>
+          <input
+            type="date"
+            id="fromDate"
+            name="fromDate"
+            value={fromDate}
+            onChange={(e) => setFromDate(e.target.value)}
+          />
+
+          <label htmlFor="toDate">To Date:</label>
+          <input
+            type="date"
+            id="toDate"
+            name="toDate"
+            value={toDate}
+            onChange={(e) => setToDate(e.target.value)}
+          />
+
+          <button type="button" onClick={fetchUserSummaryData}>
+            Search
+          </button>
+            <button type="button" onClick={handleDownload}><FontAwesomeIcon icon={faDownload} /></button>
+        </div>
+        </div>
+        <div className="summary-search-container">
+        <label htmlFor="search">Search:</label>
+        <input
+          type="text"
+          id="search"
+          name="search"
+          className="summary-search-input"
+          placeholder='Search Username'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+        <div className="summary-table-container">
+        {Array.isArray(summaryReportData) && summaryReportData.length > 0 ? (
+        <table className="summary-table">
+          <thead>
+            <tr>
+              <th>USER NAME</th>
+              <th>SUMMARY DATE</th>
+              <th>TOTAL REQUEST</th>
+              <th>TOTAL REJECTED</th>
+              <th>TOTAL SUBMIT</th>
+              <th>TOTAL DELIVERED</th>
+              <th>TOTAL FAILED</th>
+              <th>TOTAL AWAITED</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filterData().map((data, index) => (
+              <tr key={index}>
+                <td>{data.userName}</td>
+                <td>{data.summaryDate}</td>
+                <td>{data.totalRequest}</td>
+                <td>{data.totalRejected || 'N/A'}</td>
+                <td>{data.totalSubmit}</td>
+                <td>{data.totalDelivered}</td>
+                <td>{data.totalFailed}</td>
+                <td>{data.totalAwaited}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        ) : (
+          <p>No data available</p>
+        )}
+        </div>
+    </div>
+  )
+}
+
+export default UserSummaryReport
