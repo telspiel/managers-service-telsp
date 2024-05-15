@@ -9,7 +9,7 @@ function Header({ onLogout }) {
   const loggedInUserName = localStorage.getItem("loggedInUser");
   const [greeting, setGreeting] = useState("");
 
-  // Function to get the current time in IST
+  // Function to get the current time in ISTh
   const getCurrentISTTime = () => {
     const currentTime = new Date();
     const ISTOffset = 330; // IST offset in minutes
