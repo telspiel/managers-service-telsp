@@ -41,6 +41,8 @@ function Login({ onLogin }) {
 
         // Store additional user data
         localStorage.setItem("loggedInUser", data.data.username);
+        localStorage.setItem("lastLoggedInTime", data.data.lastLoginTime);
+        localStorage.setItem("lastLoggedInIp", data.data.lastLoginIp);
         localStorage.setItem("userId", data.data.userId.toString());
         localStorage.setItem("username", data.data.username);
         localStorage.setItem("role", data.data.role);

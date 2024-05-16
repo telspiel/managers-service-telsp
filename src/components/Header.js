@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSignOutAlt,
+  faUser,
+  faCalendarCheck,
+  faListSquares,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 function Header({ onLogout }) {
   const navigate = useNavigate();
 
   const loggedInUserName = localStorage.getItem("loggedInUser");
+  const lastLoginTime = localStorage.getItem("lastLoggedInTime");
+  const lastLoginIp = localStorage.getItem("lastLoggedInIp");
   const [greeting, setGreeting] = useState("");
 
   // Function to get the current time in ISTh
@@ -49,6 +56,14 @@ function Header({ onLogout }) {
         {/* <p>{greeting}</p> */}
       </div>
       <div className="header-end">
+        <div className="login-time-details">
+          <FontAwesomeIcon icon={faCalendarCheck} />
+          <span>Last Login Time: {lastLoginTime || "NA"}</span>
+        </div>
+        <div className="login-time-details">
+          <FontAwesomeIcon icon={faListSquares} />
+          <span>Last Login IP: {lastLoginIp || "NA"}</span>
+        </div>
         <div className="user-loggedin">
           <FontAwesomeIcon icon={faUser} />
           <span>{loggedInUserName}</span>
