@@ -67,7 +67,7 @@ function Header({ onLogout }) {
   return (
     <div className="header-field">
       <div className="heading-text">
-        <p>telSpiel</p>
+        <p>TelSpiel Communications</p>
         {/* <p>{greeting}</p> */}
       </div>
       <div className="header-end">
