@@ -1,156 +1,159 @@
 .credit-report-container {
-    padding: 20px;
-    /* display: flex;
+  padding: 20px;
+  /* display: flex;
     flex-direction: column; */
-  }
+}
 
-  .credit-report-container h2 {
-    margin-bottom: 15px;
-  }
-  
-  .credit-search-container {
-    width: 40%; 
-    margin-top: 15px;
-    margin-bottom: 20px;
-    float: right;
-    margin-top: 15px;
-  }
+.credit-report-container h2 {
+  margin-bottom: 15px;
+}
 
-  .credit-search-container label {
-    font-weight: 500;
-  }
-  
-  .credit-search-input {
-    width: 100%;
-    height: 40px;
-  }
-  
-  .credit-table-container {
-    width: 100%;
-  }
+.credit-search-container {
+  width: 40%;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  float: right;
+  margin-top: 15px;
+}
 
-  .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  }
-  
+.credit-search-container label {
+  font-weight: 500;
+}
+
+.credit-search-input {
+  width: 100%;
+  height: 40px;
+}
+
+.credit-table-container {
+  width: 100%;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Semi-transparent white background */
+}
 
 .credit-table {
+  width: 100%;
+  margin-top: 0 20px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.credit-table th,
+.credit-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Hover effect */
+.credit-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Striped rows */
+.credit-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Animated row entry */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.credit-table tbody tr {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.arrowUpCredit {
+  margin-left: 10px;
+  opacity: 0.5;
+  font-size: 0.8em;
+}
+.arrowUpCredit:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.arrowDownCredit {
+  opacity: 0.5;
+  font-size: 0.8em;
+}
+.arrowDownCredit:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* Pagination Style */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+  justify-content: end;
+}
+
+.pagination span {
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: 6px;
+  border: 1px solid #6610f2;
+  border-radius: 4px;
+}
+
+.pagination span.active {
+  background: linear-gradient(to right, #6610f2, #a33091);
+  color: white;
+  border: 1px solid #a33091;
+}
+
+.backwardIcon {
+  opacity: 0.8;
+}
+.backwardIcon:hover {
+  opacity: 1;
+}
+
+.forwardIcon {
+  opacity: 0.8;
+}
+.forwardIcon:hover {
+  opacity: 1;
+}
+
+@media (max-width: 750px) {
+  .credit-search-container {
     width: 100%;
-    margin-top: 0 20px;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
   }
-  
-  .credit-table th,
-  .credit-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-  }
-  
-  /* Hover effect */
-  .credit-table tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Striped rows */
-  .credit-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  /* Animated row entry */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .credit-table tbody tr {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .arrowUpCredit {
-    margin-left: 10px;
-    opacity: 0.5;
-    font-size: 0.8em;
-  }
-  .arrowUpCredit:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-
-  .arrowDownCredit {
-    opacity: 0.5;
-    font-size: 0.8em;
-  }
-  .arrowDownCredit:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-
-  /* Pagination Style */
   .pagination {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 20px;
-    justify-content: end;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
+
   .pagination span {
-    cursor: pointer;
-    padding: 2px 6px;
-    margin: 6px;
-    border: 1px solid #6610f2;
-    border-radius: 4px;
+    margin: 5px;
   }
-  
-  .pagination span.active {
-    background-color: #a33091;
-    color: white;
-    border: 1px solid #a33091;
-  }
-
-  .backwardIcon {
-    opacity: 0.8;
-  }
-  .backwardIcon:hover {
-    opacity: 1;
-  }
-
-  .forwardIcon {
-    opacity: 0.8;
-  }
-  .forwardIcon:hover {
-    opacity: 1;
-  }
-
-  @media (max-width: 750px) {
-    .credit-search-container {
-        width: 100%;
-    }
-    .pagination {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  
-    .pagination span {
-      margin: 5px;
-    }
-  }
-  
+}
