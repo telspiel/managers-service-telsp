@@ -45,6 +45,21 @@ function Header({ onLogout }) {
     return () => clearInterval(interval);
   }, []);
 
+  // Function to format the last login time
+  const formatLastLoginTime = (timeString) => {
+    if (!timeString) return "NA";
+    const date = new Date(timeString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const seconds = date.getSeconds().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "AM" : "PM";
+    hours = hours % 12 || 12; // Convert hour from 24-hour to 12-hour format
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${ampm}`;
+  };
+
   const handleLogout = () => {
     onLogout();
     navigate("/login");
@@ -58,7 +73,7 @@ function Header({ onLogout }) {
       <div className="header-end">
         <div className="login-time-details">
           <FontAwesomeIcon icon={faCalendarCheck} />
-          <span>Last Login Time: {lastLoginTime || "NA"}</span>
+          <span>Last Login Time: {formatLastLoginTime(lastLoginTime)}</span>
         </div>
         <div className="login-time-details">
           <FontAwesomeIcon icon={faListSquares} />

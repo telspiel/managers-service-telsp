@@ -19,7 +19,8 @@ main {
 }
 
 .sidebar {
-  background: #6610f2;
+  background: linear-gradient(to right, #6610f2, #a33091);
+  /* background: #6610f2; */
   color: #fff;
   min-height: 100vh;
   width: 280px;
@@ -73,7 +74,8 @@ main {
 
 /* Header Style */
 .header-field {
-  background-color: #6610f2;
+  background: linear-gradient(to right, #6610f2, #a33091);
+  /* background-color: #6610f2; */
   color: #fff;
   padding: 10px 15px;
   display: flex;

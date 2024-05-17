@@ -1,111 +1,107 @@
 /* Login.css */
 
 .background-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  
-  
-  @keyframes moveBall {
-    0% {
-      transform: translateY(-50px) translateX(15px);
-    }
-    100% {
-      transform: translateY(calc(100vh + 50px)) translateX(15px);
-    }
-  }
-  
-  .small-ball {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: absolute;
-    animation: moveBall linear infinite;
-    opacity: 0.5;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
 
-  .small-ball.blue {
-    background-color: #6610f2; 
+@keyframes moveBall {
+  0% {
+    transform: translateY(-50px) translateX(15px);
   }
-  
-  .small-ball.pink {
-    background-color: #a33091; 
+  100% {
+    transform: translateY(calc(100vh + 50px)) translateX(15px);
   }
-  
-  .login-form .small-ball {
-    visibility: hidden;
-  }
-  
+}
+
+.small-ball {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  animation: moveBall linear infinite;
+  opacity: 0.5;
+}
+
+.small-ball.blue {
+  background-color: #6610f2;
+}
+
+.small-ball.pink {
+  background-color: #a33091;
+}
+
+.login-form .small-ball {
+  visibility: hidden;
+}
 
 .login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    position: relative;
-  }
-  
-  .login-form {
-    border: 1px solid #ccc;
-    padding: 20px;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    z-index: 1;
-    transition: transform 0.3s ease-in-out; 
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
 
-  .login-form:hover {
-    transform: scale(1.05);
-  }
-  
-  .login-heading {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #6610f2;
-  }
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 15px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    border: 1px solid #a33091;
-    border-radius: 10px;
-  }
-  
-  button {
-    background-color: #a33091;
-    color: #fff;
-    padding: 12px;
-    border: none;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 20px;
-    margin-bottom: 10px;
-  }
-  
-  button:hover {
-    background-color: #6610f2;
-  }
+.login-form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out;
+}
 
-  .rights {
-    text-align: center;
-    /* font-weight: 500; */
-  }
-  
-  
+.login-form:hover {
+  transform: scale(1.05);
+}
+
+.login-heading {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #6610f2;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border: 1px solid #a33091;
+  border-radius: 10px;
+}
+
+button {
+  background: linear-gradient(to right, #6610f2, #a33091);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background: linear-gradient(to right, #a33091, #6610f2);
+}
+
+.rights {
+  text-align: center;
+  /* font-weight: 500; */
+}
